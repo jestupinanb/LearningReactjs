@@ -1,11 +1,18 @@
 import React,{useEffect} from 'react'
-import { fetchUsers } from '../redux'
+import { fetchUsers,userSuccess } from '../redux'
 import {connect} from 'react-redux'
 
-function UserContiner({userData,fetchUsers}) {
+/* const llamame = (message)=>{
+    console.log("in a function message: "+message)
+} */
+
+function UserContiner({userData,fetchUsers,fetchUsers2}) {
     useEffect(() =>{
-        fetchUsers()
-    },[])
+        console.log("efecto usado");
+        fetchUsers2();
+        //llamame("esto es un mensage")
+    },[]
+    )
     return userData.loading ? (
         <h2>Loading</h2>
     ):userData.error ? (
@@ -30,7 +37,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchUsers: () => dispatch(fetchUsers())
+        fetchUsers: () => dispatch(fetchUsers()),
+        fetchUsers2: () => dispatch(userSuccess([{name:'pepe'},{name:'pepa'}]))
     }
 }
 
